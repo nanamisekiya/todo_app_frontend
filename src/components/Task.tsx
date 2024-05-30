@@ -13,12 +13,13 @@ const Task: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
   const [timer, setTimer] = useState<number | null>(null);
 
   useEffect(() => {
+    let interval: NodeJS.Timeout;
     if (timer !== null) {
-      const interval = setInterval(() => {
-        setTimer(timer + 1);
+      interval = setInterval(() => {
+        setTimer(prevTimer => (prevTimer !== null ? prevTimer + 1 : null));
       }, 1000);
-      return () => clearInterval(interval);
     }
+      return () => clearInterval(interval);
   }, [timer]);
 
   const handleUpdate = async () => {
@@ -38,10 +39,19 @@ const Task: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
   };
 
   const handleStop = async () => {
+    const totalTimeSpent = (task.time_spent || 0) + (timer || 0);
     await stopTimer(task.id);
+    await updateTask(task.id, { time_spend: totalTimeSpent });
     setTimer(null);
     onTaskUpdate();
   };
+
+  const formatTime = (timeInSeconds: number) => {
+    const date = new Date(timeInSeconds * 1000);
+    return date.toISOString().substr(11, 8);
+  };
+
+  const elapsedTime = (task.time_spent || 0) + (timer || 0);
 
   return (
     <div>
@@ -69,10 +79,8 @@ const Task: React.FC<TaskProps> = ({ task, onTaskUpdate }) => {
       ) : (
         <button onClick={handleStart}>開始</button>
       )}
-      <span>{new Date(task.time_spent * 1000).toISOString().substr(11, 8)}</span>
-
+      <span>{formatTime(elapsedTime)}</span>
     </div>
-
   );
 };
 
