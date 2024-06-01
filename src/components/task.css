@@ -1,0 +1,44 @@
+.task {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  margin: 0 auto;
+}
+
+.task input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.task-title {
+  flex: 1;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.task input[type="text"] {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.task img {
+  margin-left: 5px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
+.task img:hover {
+  opacity: 0.7;
+}
+
+.task .timer {
+  margin-left: 10px;
+  font-size: 0.9em;
+  color: #666;
+}

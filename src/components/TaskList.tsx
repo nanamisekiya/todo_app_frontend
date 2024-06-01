@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import {Task as TaskType} from "../types";
 import {getTasks, createTask} from "../api/tasks";
 import Task from "./Task";
+import './tasklist.css';
+import addIcon from '../img/add.png';
 
 const TaskList: React.FC = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
@@ -25,14 +27,16 @@ const TaskList: React.FC = () => {
   };
 
   return(
-    <div>
-      <input
-        type="text"
-        value={newTask}
-        onChange={(e) => setNewTask(e.target.value)}
-      />
-      <button onClick={handleCreate}>追加</button>
-      <div>
+    <div className="task-list">
+      <div className="task-input">
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <img src={addIcon} alt="追加" onClick={handleCreate} />
+      </div>
+      <div className="tasks">
         {tasks.map((task) => (
           <Task key={task.id} task={task} onTaskUpdate={fetchTasks} />
         ))}

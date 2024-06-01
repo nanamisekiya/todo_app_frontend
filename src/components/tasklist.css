@@ -1,0 +1,27 @@
+.task-list {
+  width: 50%;
+  margin: 0 auto;
+  padding: 20px;
+}
+.task-input {
+  display: flex;
+}
+
+.task-list input[type="text"] {
+  width: calc(100% - 50px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+.task-input img {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.tasks {
+  margin-top: 20px;
+}
